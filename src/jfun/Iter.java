@@ -99,6 +99,23 @@ public interface Iter<T> extends Iterable<T> {
 		return i.filter(p);
 	}
 
+	// filterrec :: iter 't -> (list 't -> 't -> bool) -> iter 't
+	default Iter<T> filterrec(Func.Function2<List<T>, T, Boolean> p) {
+		List<T> l = new ArrayList<T>();
+		return () -> {
+			while(true) {
+				T e = get();
+				if(p.fn(l, e)) {
+					l.add(e);
+					return e;
+				}
+			}
+		};
+	}
+	public static <T> Iter<T> filterrec(Iter<T> i, Func.Function2<List<T>, T, Boolean> p) {
+		return i.filterrec(p);
+	}
+
 	// fold :: iter 't -> ('t -> 't -> 't) -> 't -> 't
 	default T fold(Func.Function2<? super T, ? super T, ? extends T> f, T i) {
 		try {

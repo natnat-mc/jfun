@@ -35,6 +35,7 @@ filter :: list 't -> ('t -> bool) -> list 't
 filterk :: map 'k 'v -> ('k -> bool) -> map 'k 'v
 filterkv :: map 'k 'v -> ('k * 'v -> bool) -> map 'k 'v
 filterkv :: map 'k 'v -> ('k -> 'v -> bool) -> map 'k 'v
+filterrec :: iter 't -> (list 't -> 't -> bool) -> iter 't
 filterv :: map 'k 'v -> ('v -> bool) -> map 'k 'v
 find :: list 't -> ('t -> bool) -> option 't
 findi :: list 't -> ('t -> bool) -> int
