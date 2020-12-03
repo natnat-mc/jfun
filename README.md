@@ -5,6 +5,6 @@ A small pack of functions to do things with java in a more functional style
 - standard operations on maps
 - lazy-evaluated iterables
 
-A more complete list of functions is available [functions.md](here).
+A more complete list of functions is available [here](functions.md).
 
 MIT License.
