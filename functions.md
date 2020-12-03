@@ -1,5 +1,7 @@
 # Available functions:
 ```ocaml
+Left :: 'a -> either 'a 'b
+Right :: 'b -> either 'a 'b
 _if :: ('a -> bool) -> ('a -> 'r) -> ('a -> 'r) -> ('a -> 'r)
 _if :: ('a -> bool) -> (nil -> 'r) -> (nil -> 'r) -> ('a -> 'r)
 _ifv :: ('a -> bool) -> 'r -> 'r -> ('a -> 'r')
@@ -41,20 +43,25 @@ fold :: iter 't -> ('t -> 't -> 't) -> 't -> 't
 fold :: list 't -> ('t -> 't -> 't) -> 't -> 't
 ge :: 't -> 't -> bool
 gt :: 't -> 't -> bool
+ident :: 'a -> 'a
 isnull :: 't -> bool
 iter :: 't[] -> iter 't
 iter :: iterable 't -> iter 't
 iter :: iterator 't -> iter 't
 keys :: map 'k 'v -> iter 'k
 keys :: map 'k 'v -> list 'k
+left :: either 'a 'b -> option 'a
 limit :: iter 't -> int -> iter 't
 lt :: 't -> 't -> bool
 map :: 'a * 'b -> ('a -> 'c) -> ('b -> 'd) -> 'c * 'd
+map :: either 'a 'b -> ('a -> 'c) -> ('b -> 'd) -> either 'c 'd
 map :: iter 't -> ('t -> 'u) -> 'u
 map :: list 'a -> ('a -> 'b) -> list 'b
 mapk :: map 'k 'v -> ('k -> 'l) -> map 'l 'v
 mapkv :: map 'k 'v -> ('k * 'v -> 'l * 'w) -> map 'l 'w
 mapkv :: map 'k 'v -> ('k -> 'l) -> ('v -> 'w) -> map 'l 'w
+mapleft :: either 'a 'b -> ('a -> 'c) -> either 'c 'b
+mapright :: either 'a 'b -> ('b -> 'c) -> either 'a 'c
 mapv :: map 'k 'v -> ('v -> 'w) -> map 'k 'w
 mod :: double -> double -> double
 mod :: int -> int -> int
@@ -75,6 +82,8 @@ pair :: list ('k * 'v) -> map 'k 'v
 pairs :: map 'k 'v -> iter ('k * 'v)
 pairs :: map 'k 'v -> list ('k * 'v)
 produce :: 't -> nil -> 't
+right :: either 'a 'b -> option 'b
+side :: either 'a 'b -> LEFT | RIGHT
 skip :: iter 't -> int -> iter 't
 sorted :: list 't -> ('t -> 't -> int) -> list 't
 stricteq :: 'a -> 'b -> bool
@@ -85,6 +94,7 @@ sub :: long -> long -> long
 tap :: iter 't -> ('t -> nil) -> iter 't
 tee :: iter 't -> (iter 't) * (iter 't)
 tofn :: iter 't -> (nil -> 't)
+unify :: either 'a 'b -> ('a -> 'c) -> ('b -> 'c) -> 'c
 until :: iter 't -> ('t -> bool) -> iter 't
 unzip :: iter ('a * 'b) -> (iter 'a) * (iter 'b)
 unzip :: list ('a * 'b) -> (list 'a) * (list 'b)

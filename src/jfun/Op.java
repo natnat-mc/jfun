@@ -5,6 +5,9 @@ import java.util.*;
 public final class Op {
 	private Op() {} // no instances
 
+	// ident :: 'a -> 'a
+	public static <A> A ident(A a) { return a; }
+
 	// eq :: 'a -> 'b -> bool
 	public static <A, B> boolean eq(A a, B b) { return (a == null && b == null) || (a != null && b != null && a.equals(b)); }
 
