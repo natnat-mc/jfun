@@ -292,6 +292,27 @@ public interface Iter<T> extends Iterable<T> {
 		return i.count();
 	}
 
+	// peek :: iter 't -> option 't * iter 't
+	default Pair<T, Iter<T>> peek() {
+		try {
+			T e = get();
+			boolean[] s = {false};
+			return new Pair<T, Iter<T>>(
+				e,
+				() -> {
+					if(s[0]) return get();
+					s[0] = true;
+					return e;
+				}
+			);
+		} catch(StopIteration e) {
+			return new Pair<T, Iter<T>>(null, this);
+		}
+	}
+	public static <T> Pair<T, Iter<T>> peek(Iter<T> i) {
+		return i.peek();
+	}
+
 	// iter :: iterator 't -> iter 't
 	public static <T> Iter<T> iter(Iterator<T> i) {
 		return () -> {

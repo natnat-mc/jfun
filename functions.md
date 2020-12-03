@@ -81,6 +81,7 @@ notnull :: 't -> bool
 pair :: list ('k * 'v) -> map 'k 'v
 pairs :: map 'k 'v -> iter ('k * 'v)
 pairs :: map 'k 'v -> list ('k * 'v)
+peek :: iter 't -> option 't * iter 't
 produce :: 't -> nil -> 't
 right :: either 'a 'b -> option 'b
 side :: either 'a 'b -> LEFT | RIGHT
