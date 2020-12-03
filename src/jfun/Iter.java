@@ -100,7 +100,7 @@ public interface Iter<T> extends Iterable<T> {
 	}
 
 	// filterrec :: iter 't -> (list 't -> 't -> bool) -> iter 't
-	default Iter<T> filterrec(Func.Function2<List<T>, T, Boolean> p) {
+	default Iter<T> filterrec(Func.Function2<List<? super T>, ? super T, Boolean> p) {
 		List<T> l = new ArrayList<T>();
 		return () -> {
 			while(true) {
@@ -112,7 +112,7 @@ public interface Iter<T> extends Iterable<T> {
 			}
 		};
 	}
-	public static <T> Iter<T> filterrec(Iter<T> i, Func.Function2<List<T>, T, Boolean> p) {
+	public static <T> Iter<T> filterrec(Iter<T> i, Func.Function2<List<? super T>, ? super T, Boolean> p) {
 		return i.filterrec(p);
 	}
 
