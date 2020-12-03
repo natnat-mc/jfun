@@ -1,7 +1,9 @@
 # Available functions:
 ```ocaml
 Left :: 'a -> either 'a 'b
+None :: maybe 't
 Right :: 'b -> either 'a 'b
+Some :: 't -> maybe 't
 _if :: ('a -> bool) -> ('a -> 'r) -> ('a -> 'r) -> ('a -> 'r)
 _if :: ('a -> bool) -> (nil -> 'r) -> (nil -> 'r) -> ('a -> 'r)
 _ifv :: ('a -> bool) -> 'r -> 'r -> ('a -> 'r')
@@ -48,7 +50,9 @@ ge :: 't -> 't -> bool
 gt :: 't -> 't -> bool
 ident :: 'a -> 'a
 infinite :: 't -> iter 't
+isnone :: maybe 't -> bool
 isnull :: 't -> bool
+issome :: maybe 't -> bool
 iter :: 't[] -> iter 't
 iter :: (nil -> 't) -> iter 't
 iter :: iterable 't -> iter 't
@@ -62,6 +66,7 @@ map :: 'a * 'b -> ('a -> 'c) -> ('b -> 'd) -> 'c * 'd
 map :: either 'a 'b -> ('a -> 'c) -> ('b -> 'd) -> either 'c 'd
 map :: iter 't -> ('t -> 'u) -> 'u
 map :: list 'a -> ('a -> 'b) -> list 'b
+map :: maybe 't -> ('t -> 'u) -> maybe 'u
 mapk :: map 'k 'v -> ('k -> 'l) -> map 'l 'v
 mapkv :: map 'k 'v -> ('k * 'v -> 'l * 'w) -> map 'l 'w
 mapkv :: map 'k 'v -> ('k -> 'l) -> ('v -> 'w) -> map 'l 'w
@@ -83,6 +88,7 @@ neq :: 'a -> 'b -> bool
 newList :: list 'a -> list 'b
 newMap :: map 'k 'v -> map 'k 'v
 notnull :: 't -> bool
+or :: maybe 't -> 't -> 't
 pair :: list ('k * 'v) -> map 'k 'v
 pairs :: map 'k 'v -> iter ('k * 'v)
 pairs :: map 'k 'v -> list ('k * 'v)
@@ -94,6 +100,7 @@ single :: 't -> iter 't
 skip :: iter 't -> int -> iter 't
 some :: iter 't -> ('t -> bool) -> bool
 some :: list 't -> ('t -> bool) -> bool
+some :: maybe 't -> option 't
 sorted :: list 't -> ('t -> 't -> int) -> list 't
 stricteq :: 'a -> 'b -> bool
 strictneq :: 'a -> 'b -> bool
@@ -105,6 +112,7 @@ tee :: iter 't -> (iter 't) * (iter 't)
 times :: 't -> int -> iter 't
 tofn :: iter 't -> (nil -> 't)
 unify :: either 'a 'b -> ('a -> 'c) -> ('b -> 'c) -> 'c
+unify :: maybe 't -> (nil -> 't) -> 't
 until :: iter 't -> ('t -> bool) -> iter 't
 unzip :: iter ('a * 'b) -> (iter 'a) * (iter 'b)
 unzip :: list ('a * 'b) -> (list 'a) * (list 'b)
