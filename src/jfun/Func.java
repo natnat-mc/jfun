@@ -75,7 +75,7 @@ public final class Func {
 	// _ifv :: ('a -> bool) -> 'r -> 'r -> ('a -> 'r')
 	public static <A, R> Function1<A, R> _ifv(Predicate1<A> p, R t, R f) { return a -> p.fn(a) ? t : f; }
 
-	// compose :: ('a -> 'b) -> ('c -> 'd) -> ('a -> 'd)
+	// compose :: ('a -> 'b) -> ('b -> 'c) -> ('a -> 'c)
 	public static <A, B, C> Function1<A, C> compose(Function1<A, B> a, Function1<B, C> b) { return a.andThen(b); }
 
 	// negate :: ('a -> bool) -> ('a -> bool)

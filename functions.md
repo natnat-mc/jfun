@@ -15,7 +15,7 @@ chain :: iter 't -> iter 't -> iter 't
 cmp :: 't -> 't -> int
 collect :: iter 't -> list 't
 collectmap :: iter ('k * 'v) -> map 'k 'v
-compose :: ('a -> 'b) -> ('c -> 'd) -> ('a -> 'd)
+compose :: ('a -> 'b) -> ('b -> 'c) -> ('a -> 'c)
 concat :: str -> bool -> str
 concat :: str -> double -> str
 concat :: str -> int -> str
