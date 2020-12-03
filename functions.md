@@ -9,6 +9,8 @@ _ifv :: bool -> 't -> 't -> 't
 add :: double -> double -> double
 add :: int -> int -> int
 add :: long -> long -> long
+all :: iter 't -> ('t -> bool) -> bool
+all :: list 't -> ('t -> bool) -> bool
 chain :: iter 't -> iter 't -> iter 't
 cmp :: 't -> 't -> int
 collect :: iter 't -> list 't
@@ -87,6 +89,8 @@ produce :: 't -> nil -> 't
 right :: either 'a 'b -> option 'b
 side :: either 'a 'b -> LEFT | RIGHT
 skip :: iter 't -> int -> iter 't
+some :: iter 't -> ('t -> bool) -> bool
+some :: list 't -> ('t -> bool) -> bool
 sorted :: list 't -> ('t -> 't -> int) -> list 't
 stricteq :: 'a -> 'b -> bool
 strictneq :: 'a -> 'b -> bool

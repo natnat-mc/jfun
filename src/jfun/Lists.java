@@ -109,4 +109,16 @@ public final class Lists {
 	public static <T> boolean contains(List<T> l, T e) {
 		return l.contains(e);
 	}
+
+	// some :: list 't -> ('t -> bool) -> bool
+	public static <T> boolean some(List<T> l, Func.Predicate1<? super T> p) {
+		for(T e: l) if(p.fn(e)) return true;
+		return false;
+	}
+
+	// all :: list 't -> ('t -> bool) -> bool
+	public static <T> boolean all(List<T> l, Func.Predicate1<? super T> p) {
+		for(T e: l) if(!p.fn(e)) return false;
+		return true;
+	}
 }

@@ -330,6 +330,28 @@ public interface Iter<T> extends Iterable<T> {
 		return i.peek();
 	}
 
+	// some :: iter 't -> ('t -> bool) -> bool
+	default boolean some(Func.Predicate1<? super T> p) {
+		try {
+			if(p.fn(get())) return true;
+		} catch(StopIteration e) {}
+		return false;
+	}
+	public static <T> boolean some(Iter<T> i, Func.Predicate1<? super T> p) {
+		return i.some(p);
+	}
+
+	// all :: iter 't -> ('t -> bool) -> bool
+	default boolean all(Func.Predicate1<? super T> p) {
+		try {
+			if(!p.fn(get())) return false;
+		} catch(StopIteration e) {}
+		return false;
+	}
+	public static <T> boolean all(Iter<T> i, Func.Predicate1<? super T> p) {
+		return i.all(p);
+	}
+
 	// iter :: iterator 't -> iter 't
 	public static <T> Iter<T> iter(Iterator<T> i) {
 		return () -> {
