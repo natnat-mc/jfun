@@ -47,8 +47,10 @@ fold :: list 't -> ('t -> 't -> 't) -> 't -> 't
 ge :: 't -> 't -> bool
 gt :: 't -> 't -> bool
 ident :: 'a -> 'a
+infinite :: 't -> iter 't
 isnull :: 't -> bool
 iter :: 't[] -> iter 't
+iter :: (nil -> 't) -> iter 't
 iter :: iterable 't -> iter 't
 iter :: iterator 't -> iter 't
 keys :: map 'k 'v -> iter 'k
@@ -88,6 +90,7 @@ peek :: iter 't -> option 't * iter 't
 produce :: 't -> nil -> 't
 right :: either 'a 'b -> option 'b
 side :: either 'a 'b -> LEFT | RIGHT
+single :: 't -> iter 't
 skip :: iter 't -> int -> iter 't
 some :: iter 't -> ('t -> bool) -> bool
 some :: list 't -> ('t -> bool) -> bool
@@ -99,6 +102,7 @@ sub :: int -> int -> int
 sub :: long -> long -> long
 tap :: iter 't -> ('t -> nil) -> iter 't
 tee :: iter 't -> (iter 't) * (iter 't)
+times :: 't -> int -> iter 't
 tofn :: iter 't -> (nil -> 't)
 unify :: either 'a 'b -> ('a -> 'c) -> ('b -> 'c) -> 'c
 until :: iter 't -> ('t -> bool) -> iter 't

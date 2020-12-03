@@ -381,6 +381,11 @@ public interface Iter<T> extends Iterable<T> {
 		};
 	}
 
+	// iter :: (nil -> 't) -> iter 't
+	public static <T> Iter<T> iter(Func.Function0<T> f) {
+		return f::fn;
+	}
+
 	// keys :: map 'k 'v -> iter 'k
 	public static <K> Iter<K> keys(Map<K, ?> m) {
 		return iter(m.keySet());
@@ -394,6 +399,26 @@ public interface Iter<T> extends Iterable<T> {
 	// pairs :: map 'k 'v -> iter ('k * 'v)
 	public static <K, V> Iter<Pair<K, V>> pairs(Map<K, V> m) {
 		return iter(m.entrySet()).map(e -> new Pair<K, V>(e.getKey(), e.getValue()));
+	}
+
+	// single :: 't -> iter 't
+	public static <T> Iter<T> single(T e) {
+		boolean[] r = {false};
+		return () -> {
+			if(r[0]) throw new StopIteration();
+			r[0] = true;
+			return e;
+		};
+	}
+
+	// times :: 't -> int -> iter 't
+	public static <T> Iter<T> times(T e, int l) {
+		return single(e).cycle().limit(l);
+	}
+
+	// infinite :: 't -> iter 't
+	public static <T> Iter<T> infinite(T e) {
+		return () -> e;
 	}
 
 	// unzip :: iter ('a * 'b) -> (iter 'a) * (iter 'b)
