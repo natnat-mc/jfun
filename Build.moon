@@ -9,6 +9,7 @@ var 'CLASSES', _.patsubst SOURCES, 'src/%.java', 'build/classes/%.class'
 var 'DATA_OUT', _.patsubst DATA, 'data/%', 'build/classes/%'
 var 'JARFILE', "build/#{NAME}.jar"
 var 'MANIFEST', 'build/Manifest.mf'
+var 'FNLIST', 'functions.md'
 
 var 'JAVA', '/usr/lib/jvm/java-1.8-openjdk/bin/java'
 var 'JAVAC', '/usr/lib/jvm/java-1.8-openjdk/bin/javac'
@@ -21,6 +22,9 @@ with public target 'info'
 		for var in *({'MAIN', 'NAME', 'SOURCES', 'DATA', 'CLASSES', 'DATA_OUT', 'JARFILE', 'MANIFEST', 'JAVA', 'JAVAC', 'JAR'})
 			print "#{var}: #{_G[var]}"
 	\sync!
+
+with public target 'fnlist'
+	\depends FNLIST
 
 with public default target 'jar'
 	\after JARFILE
@@ -43,6 +47,14 @@ with public target 'clean'
 
 with public target 'mrproper'
 	\fn => _.cmd 'rm', '-rf', 'build'
+
+with target FNLIST
+	\depends CLASSES
+	\produces '%'
+	\fn =>
+		_.sh [[printf '# Available functions:\n```ocaml\n' > ]] .. @out
+		_.sh [[find src -name '*.java' | xargs cat | egrep '^\s+//.+ ::' | sed 's/\t//g' | sed 's|// ||' | sort | uniq >> ]] .. @out
+		_.sh [[printf '```\n' >> ]] .. @out
 
 with target JARFILE
 	\depends CLASSES
